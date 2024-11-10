@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D GAME</title>
+    <style>
+        body { margin: 0; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        //RENDERING CAMERA
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+        print("hello")
+
+        
+
+        // CREATE GEOMETRY
+        const geometry = new THREE.BoxGeometry();
+        const material = new THREE.MeshBasicMaterial({ color: "#5834eb" });
+        const cube = new THREE.Mesh(geometry, material);
+
+        const Gemo = new THREE.BoxGeometry();
+        const material2 = new THREE.MeshBasicMaterial({color : "#f00b07"});
+        const Cube2 = new THREE.Mesh(Gemo, material2);
+
+        const Gemo2 = new THREE.BoxGeometry();
+        const material23 = new THREE.MeshBasicMaterial({color : "#f08b07"});
+        const Cube23 = new THREE.Mesh(Gemo2, material23);
+
+        const Gemo3 = new THREE.BoxGeometry();
+        const material3 = new THREE.MeshBasicMaterial({color : "#07f0ec"});
+        const Cube4 = new THREE.Mesh(Gemo3, material3);
+
+        const Gemo4 = new THREE.SphereGeometry();
+        const material4 = new THREE.MeshBasicMaterial({color : "#f08b07"});
+        const Cube5 = new THREE.Mesh(Gemo4, material4);
+
+        
+        
+        scene.add(cube);
+        scene.add(Cube2);
+        scene.add(Cube23);
+        scene.add(Cube4);
+        
+        scene.add(Cube5);
+      
+
+        
+        
+        
+        camera.position.z = 5;
+        Cube5.position.z = -40
+
+        $camerarotation = 5;
+        $rotate = true;
+
+        //animating cube
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            
+            
+            Cube2.rotation.x -= 0.01;
+            Cube2.rotation.y -= 0.01;
+            
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+
+            
+            Cube5.scale.x = 12
+            Cube5.scale.y =12
+            Cube5.scale.z = 12
+            
+            Cube5.rotation.y += 0.04
+
+            
+
+            if($rotate == true)
+            {
+                $camerarotation -= 0.01;
+
+            }
+
+            if($rotate == false)
+            {
+                $camerarotation += 0.01;
+                
+            }
+
+            if($camerarotation <= 1 && $rotate == true)
+            {
+                $rotate = false;
+            }
+
+            if($camerarotation >= 4 && $rotate == false)
+            {
+                $rotate = true;
+            }
+
+            camera.position.z = $camerarotation
+            
+            renderer.render(scene, camera);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
